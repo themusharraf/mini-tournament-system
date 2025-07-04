@@ -44,7 +44,7 @@ mini-tournament-system/
 
 | Texnologiya          | Maqsadi                                 |
 |----------------------|-----------------------------------------|
-| Python 3.13+         | Asosiy dasturlash tili                  |
+| Python 3.13          | Asosiy dasturlash tili                  |
 | FastAPI              | Asosiy web framework                    |
 | Async SQLAlchemy 2.0 | Asinxron ORM                            |
 | Alembic              | Migratsiyalar                           |
