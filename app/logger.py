@@ -1,6 +1,7 @@
-from loguru import logger
-import sys
 import os
+import sys
+
+from loguru import logger
 
 # Remove default logger
 logger.remove()
@@ -23,9 +24,9 @@ logger.add(
 logger.add(
     sys.stderr,
     format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
-           "<level>{level}</level> | "
-           "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - "
-           "<level>{message}</level>",
+    "<level>{level}</level> | "
+    "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - "
+    "<level>{message}</level>",
     level="INFO",
     backtrace=True,
     diagnose=True,

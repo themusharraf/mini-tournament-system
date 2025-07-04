@@ -23,3 +23,16 @@ help:
 	@echo "  make migrate-up                     - Apply migrations"
 	@echo "  make migrate-down                   - Rollback last migration"
 	@echo "  make migrate-history                - Show migration history"
+
+
+mypy:
+	mypy .
+
+ruff:
+	ruff check .
+
+ruff-fix:
+	ruff check . --fix
+
+black:
+	black .

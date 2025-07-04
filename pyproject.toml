@@ -1,11 +1,59 @@
 [project]
 name = "mini-tournament-system"
 version = "0.1.0"
-description = "FastAPI + Sqlalchemy + Alembic + PostgreSQL + docker"
-authors = [{ name = "Musharraf Ibragimov", email = "meibrohimov@gmail.com" }]
+description = "FastAPI + SQLAlchemy + Alembic + PostgreSQL + Docker"
+authors = [
+    { name = "Musharraf Ibragimov", email = "meibrohimov@gmail.com" }
+]
 requires-python = ">=3.11"
 dependencies = [
-    "SQLAlchemy>=2.0",
+    "fastapi",
+    "uvicorn[standard]",
+    "sqlalchemy>=2.0",
     "asyncpg",
-    "alembic"
+    "alembic",
+    "pydantic>=2.0",
+    "pydantic-settings",
+    "python-dotenv"
 ]
+
+[tool.mypy]
+python_version = "3.13"
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = true
+strict_optional = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+show_column_numbers = true
+allow_untyped_globals = true
+
+
+[tool.pydantic-mypy]
+init_typed = true
+warn_required_dynamic_aliases = true
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["F401"]
+
+[tool.black]
+line-length = 120
+target-version = ['py313']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''

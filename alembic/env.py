@@ -1,18 +1,18 @@
 import asyncio
 import sys
+from logging.config import fileConfig
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).parent.parent))
-
-from logging.config import fileConfig
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
-from alembic import context
 
+from alembic import context
 from app.config import settings
 from app.db import Base
-from app.models.tournament import Tournament, Player
+from app.models.tournament import Player, Tournament
+
+sys.path.append(str(Path(__file__).parent.parent))
 
 config = context.config
 

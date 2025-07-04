@@ -1,1 +1,1 @@
-from app.models.tournament import Tournament, Player
+from app.models.tournament import Player, Tournament
