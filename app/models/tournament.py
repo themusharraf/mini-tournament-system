@@ -1,5 +1,6 @@
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 from sqlalchemy import DateTime, ForeignKey, BigInteger, VARCHAR
+from email_validator import validate_email, EmailNotValidError
 from app.models.base import BaseModel
 
 
@@ -7,9 +8,9 @@ class Tournament(BaseModel):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     name: Mapped[str] = mapped_column(VARCHAR(255), nullable=False)
     max_players: Mapped[int] = mapped_column(nullable=False)
-    start_time: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
+    start_time: Mapped[DateTime] = mapped_column(DateTime(timezone=True), nullable=False)
 
-    players: Mapped[list["Player"]] = relationship(back_populates="tournaments", cascade="all, delete-orphan")
+    players: Mapped[list["Player"]] = relationship(back_populates="tournament", cascade="all, delete-orphan")
 
 
 class Player(BaseModel):
@@ -19,3 +20,17 @@ class Player(BaseModel):
     tournament_id: Mapped[int] = mapped_column(ForeignKey("tournaments.id"), nullable=False)
 
     tournament: Mapped["Tournament"] = relationship(back_populates="players")
+
+    @validates('email')
+    def validate_email_address(self, key, address):
+        """
+        :param key:
+        :param address:
+        :return str: The validated and normalized email address.:
+        :raise ValueError: If the email address is not valid.:
+        """
+        try:
+            validate_email(address)
+        except EmailNotValidError as e:
+            raise ValueError(str(e))
+        return address

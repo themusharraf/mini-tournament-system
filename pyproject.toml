@@ -1,0 +1,11 @@
+[project]
+name = "mini-tournament-system"
+version = "0.1.0"
+description = "FastAPI + Sqlalchemy + Alembic + PostgreSQL + docker"
+authors = [{ name = "Musharraf Ibragimov", email = "meibrohimov@gmail.com" }]
+requires-python = ">=3.11"
+dependencies = [
+    "SQLAlchemy>=2.0",
+    "asyncpg",
+    "alembic"
+]
