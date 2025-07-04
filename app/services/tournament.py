@@ -60,7 +60,7 @@ async def register_player(db: DBSession, tournament_id: int, player_data: Player
     player_count = count_result.scalar()
 
     if player_count is not None and tournament.max_players is not None:
-        if player_count <= tournament.max_players:
+        if player_count >= tournament.max_players:
             raise HTTPException(status_code=400, detail="Tournament is full")
     email_check = await db.execute(
         select(Player).where(Player.email == player_data.email, Player.tournament_id == tournament_id)

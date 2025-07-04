@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, EmailStr, Field, field_serializer, field_validator
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_serializer, field_validator
 
 
 class TournamentCreate(BaseModel):
@@ -21,6 +21,7 @@ class TournamentCreate(BaseModel):
 
 
 class TournamentRead(BaseModel):
+    id: int
     name: str
     max_players: int
     start_time: datetime
@@ -29,8 +30,7 @@ class TournamentRead(BaseModel):
     def serialize_start_time(self, dt: datetime, _info: Any) -> str:
         return dt.strftime("%Y-%m-%d %H:%M:%S")
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PlayerCreate(BaseModel):
@@ -42,5 +42,4 @@ class PlayerRead(BaseModel):
     name: str
     email: EmailStr
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

@@ -36,3 +36,6 @@ ruff-fix:
 
 black:
 	black .
+
+test:
+	pytest -v
